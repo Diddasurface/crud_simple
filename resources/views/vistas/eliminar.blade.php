@@ -7,8 +7,8 @@
     <form  action="{{ route('vistas.destruir')}}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="nombre">ID producto:</label>
-            <input type="text" id="IdProducto" name="IdProducto" class="form-control" required>
+            <label for="nombre">Nombre producto:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" required>
         </div>
         
         <button type="submit" class="form-control">Eliminar</button>

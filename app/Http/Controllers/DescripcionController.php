@@ -50,8 +50,9 @@ class DescripcionController extends Controller
         return redirect()->back()->with('success', 'Operacion realizada!!!');
     }
     public function destruir(Request $request){
-        $Id = $request->input('IdProducto');
-        $productos = Productos::find($Id);
+        $nombre = $request->input('nombre');
+        $productos = Productos::where('nombre',$nombre)->first();
+        
         if($productos){
             $productos->delete();
             return redirect()->back()->with('success', 'Operacion realizada!!!');
