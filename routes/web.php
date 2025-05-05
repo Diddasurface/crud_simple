@@ -14,13 +14,12 @@ use App\Http\Controllers\DescripcionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('vistas.crear');
 });
 Route::get('/vistas/crear',[DescripcionController::class,'crear'])->name('vistas.crear');
 Route::POST('/vistas/store',[DescripcionController::class,'store'])->name('vistas.store');
 Route::get('/vistas/leer',[DescripcionController::class,'leer'])->name('vistas.leer');
 Route::put('/vistas/{produc}',[DescripcionController::class,'update'])->name('vistas.update');
-
-
+//rutas para eliminar 
 Route::get('/vistas/eliminar',[DescripcionController::class,'eliminar'])->name('vistas.eliminar');
 Route::POST('/vistas/destruir',[DescripcionController::class,'destruir'])->name('vistas.destruir');
