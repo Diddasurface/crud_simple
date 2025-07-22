@@ -1,9 +1,14 @@
 name: holaMundo
-on: [push]
+
+on:
+  push:
+
 jobs:
   build:
-    runs-on: ubuntu-lasted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: ejecutar un script
-        run: echo "¡hola, github acciont!"
+
+      - name: Ejecutar un script
+        run: echo "¡Hola, GitHub Actions!"
+
