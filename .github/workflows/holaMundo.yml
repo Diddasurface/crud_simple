@@ -4,6 +4,6 @@ jobs:
   build:
    runs-on: ubuntu-lasted
    steps:
-    - uses: actions/checkout@v3
-    - name: ejecutar un script
-      run: echo "¡hola, github acciont!"
+     - uses: actions/checkout@v3
+     - name: ejecutar un script
+       run: echo "¡hola, github acciont!"
