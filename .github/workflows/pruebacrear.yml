@@ -1,0 +1,55 @@
+name: Pruebas Laravel
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, bcmath, mysql
+          coverage: none
+
+      - name: Instalar dependencias con Composer
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Copiar .env.testing
+        run: cp .env.example .env.testing
+
+      - name: Configurar APP_KEY
+        run: php artisan key:generate --env=testing
+
+      - name: Ejecutar migraciones
+        run: php artisan migrate --env=testing
+
+      - name: Ejecutar pruebas
+        run: php artisan test --env=testing
+
+      - name: Verificar salida
+        if: failure()
+        run: cat storage/logs/laravel.log
